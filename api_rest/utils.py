@@ -1,5 +1,7 @@
 import random
-from models import Lead, db
+from models import Lead
+from database import db
+import lead_service
 
 # Função para gerar leads fictícios
 def generate_leads():
@@ -13,7 +15,5 @@ def generate_leads():
         temperature = random.uniform(10, 40)
         interest = random.choice(interests)
 
-        lead = Lead(name, latitude, longitude, temperature, interest)
-        db.session.add(lead)
-
-    db.session.commit()
+        lead = lead_service.LeadService.create_lead(name, latitude, longitude, temperature, interest)
+        
