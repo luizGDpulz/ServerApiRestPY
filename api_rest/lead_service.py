@@ -6,7 +6,15 @@ class LeadService:
 
     def create_lead(self, name, email, telefone, latitude, longitude, temperature, interest):
 
+        existing_lead = Lead.query.filter_by(email=email).first()
+        if existing_lead:
+            print(f"O e-mail '{email}' já existe no banco de dados. Ignorando a inserção.")
+            return  # Ignora a inserção se o e-mail já existe
         
+        existing_lead = Lead.query.filter_by(telefone=telefone).first()
+        if existing_lead:
+            print(f"O Telefone '{telefone}' já existe no banco de dados. Ignorando a inserção.")
+            return  # Ignora a inserção se o telefone já existe
         
         lead = Lead(name=name, email=email, telefone=telefone, latitude=latitude, longitude=longitude, temperature=temperature, interest=interest)
         self.db.session.add(lead)
