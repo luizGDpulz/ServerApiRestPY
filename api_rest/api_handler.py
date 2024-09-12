@@ -28,6 +28,8 @@ class LeadAPIHandler:
         data = request.json
         self.lead_service.create_lead(
             name=data['name'],
+            email=data['email'],
+            telefone=data['telefone'],
             latitude=data['latitude'],
             longitude=data['longitude'],
             temperature=data['temperature'],
@@ -41,6 +43,8 @@ class LeadAPIHandler:
         self.lead_service.update_lead(
             lead_id=id,
             name=data['name'],
+            email=data['email'],
+            telefone=data['telefone'],
             latitude=data['latitude'],
             longitude=data['longitude'],
             temperature=data['temperature'],

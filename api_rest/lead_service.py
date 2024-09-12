@@ -4,8 +4,11 @@ class LeadService:
     def __init__(self, db):
         self.db = db
 
-    def create_lead(self, name, latitude, longitude, temperature, interest):
-        lead = Lead(name=name, latitude=latitude, longitude=longitude, temperature=temperature, interest=interest)
+    def create_lead(self, name, email, telefone, latitude, longitude, temperature, interest):
+
+        
+        
+        lead = Lead(name=name, email=email, telefone=telefone, latitude=latitude, longitude=longitude, temperature=temperature, interest=interest)
         self.db.session.add(lead)
         self.db.session.commit()
 
@@ -15,9 +18,11 @@ class LeadService:
     def get_lead_by_id(self, lead_id):
         return Lead.query.get_or_404(lead_id)
 
-    def update_lead(self, lead_id, name, latitude, longitude, temperature, interest):
+    def update_lead(self, lead_id, name, email, telefone, latitude, longitude, temperature, interest):
         lead = self.get_lead_by_id(lead_id)
         lead.name = name
+        lead.email = email
+        lead.telefone = telefone 
         lead.latitude = latitude
         lead.longitude = longitude
         lead.temperature = temperature
